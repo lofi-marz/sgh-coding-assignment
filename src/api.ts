@@ -1,17 +1,19 @@
 import { BASE_URL, API_URL } from './consts';
 import { GetServersResponseSchema } from './schemas';
 import { GameServer } from './types';
+type ApiSuccess<T = undefined> = T extends undefined
+    ? { success: true }
+    : { success: true; data: T };
+type ApiFailure = { success: false; error: string };
+type ApiResponse<T = undefined> = ApiSuccess<T> | ApiFailure;
 
-export async function getServers(): Promise<
-    | {
-          success: true;
-          data: GameServer[];
-      }
-    | {
-          success: false;
-          error: string;
-      }
-> {
+export async function startServer(
+    serverId: GameServer['id']
+): Promise<ApiResponse> {
+    console.log('Starting server with id:', serverId);
+    return { success: true };
+}
+export async function getServers(): Promise<ApiResponse<GameServer[]>> {
     try {
         const response = await fetch(BASE_URL + API_URL).then((res) =>
             res.json()
