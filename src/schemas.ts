@@ -11,7 +11,7 @@ const RegionSchema = z.union([
   z.literal("North America"),
   z.literal("South America"),
 ]);
-const MinecraftServerSchema = z.object({
+export const MinecraftServerSchema = z.object({
   id: z.number(),
   name: z.string(),
   game: z.literal("Minecraft"), //The only game present at the moment is Minecraft, when more are supported, this should be changed to a Union
