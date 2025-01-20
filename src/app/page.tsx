@@ -17,7 +17,8 @@ import { getServers } from '@/api';
 */
 
 export default async function Home() {
-    const serverData = await getServers();
+    const serversData = await getServers();
+    if (!serversData.success) throw new Error('Failed to retrieve severs');
     //const [serverData, setServerData] = useState(null);
     // you can update this fetching code if required but it's not necessary for the assignment.
     /*useEffect(() => {
@@ -33,23 +34,10 @@ export default async function Home() {
 
     fetchServerData();
   }, []);*/
-
+    const server = serversData.data[0];
     return (
         <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
-            {/* main can be deleted and replaced with your own cards */}
-            <main className="row-start-2 flex flex-col items-center gap-8 sm:items-start">
-                <h1 className="text-2xl font-bold">Minecraft Server List</h1>
-                <p className="text-gray-600">
-                    Below is the JSON data fetched from <code>/api/mock</code>.
-                    Use it to build the UI.
-                </p>
-                <pre className="w-full max-w-4xl overflow-auto rounded-lg bg-gray-200 p-4 text-sm text-gray-800">
-                    {serverData
-                        ? JSON.stringify(serverData, null, 2)
-                        : 'Loading data...'}
-                </pre>
-            </main>
-            {/* main can be deleted and replaced with your own cards */}
+            <ServerCard />
         </div>
     );
 }
