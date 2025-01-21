@@ -1,10 +1,10 @@
 'use client';
 
 import { GameServer } from '@/types';
-import { useState } from 'react';
 import {
     Card,
     CardContent,
+    CardDescription,
     CardFooter,
     CardHeader,
     CardTitle,
@@ -14,9 +14,22 @@ import { GameIcon } from './GameIcon';
 import { Button } from './ui/button';
 import { useMockServerStatus } from '@/hooks/useMockServerStatus';
 import { Spinner } from './Spinner';
+import { Badge } from './ui/badge';
+import { ServerStatusIndicator } from './ServerStatusIndicator';
+import { useCallback, useState } from 'react';
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from './ui/dialog';
 
 export function ServerCard({
-    server: { status, name, game },
+    server: { status, name, game, mods },
 }: {
     server: GameServer;
 }) {
@@ -25,31 +38,85 @@ export function ServerCard({
         toggleStatus,
         mutationStatus,
     } = useMockServerStatus(status);
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const onToggleServerStatus = useCallback(() => {
+        if (mockStatus === 'offline') {
+            toggleStatus();
+        } else {
+            setDialogOpen(true);
+        }
+    }, [mockStatus, toggleStatus]);
     return (
-        <Card className="w-fu max-w-screen-md">
+        <Card>
             <CardHeader
                 className={cn(
-                    'rounded-t-xl transition-all',
-                    mockStatus === 'online'
-                        ? 'bg-success text-success-foreground'
-                        : 'bg-error text-error-foreground'
+                    'flex flex-row items-center justify-start gap-4 rounded-t-xl transition-all'
                 )}>
-                <CardTitle className="flex items-center justify-start gap-4 text-2xl">
-                    <GameIcon gameName={game} className="size-8" />
-                    {name}
-                </CardTitle>
+                <GameIcon gameName={game} className="size-8" />
+                <div className="grow">
+                    <CardTitle className="flex w-full items-center justify-between gap-4">
+                        {name}
+                        <ServerStatusIndicator status={mockStatus} />
+                    </CardTitle>
+                    <CardDescription
+                        className={cn(
+                            'flex flex-col rounded-t-xl transition-all'
+                        )}>
+                        {game}
+                    </CardDescription>
+                </div>
             </CardHeader>
-            <CardContent>Test</CardContent>
+            <CardContent>
+                Test
+                <div className="flex gap-1">
+                    {mods.map((m) => (
+                        <Badge key={m} variant="secondary">
+                            {m}
+                        </Badge>
+                    ))}
+                </div>
+            </CardContent>
             <CardFooter>
-                <Button onClick={toggleStatus}>
-                    {mutationStatus === 'pending' ? (
-                        <Spinner />
-                    ) : mockStatus === 'offline' ? (
-                        'Start Server'
-                    ) : (
-                        'Stop Server'
-                    )}
-                </Button>
+                <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+                    <Button
+                        onClick={onToggleServerStatus}
+                        disabled={mutationStatus === 'pending'}
+                        variant={
+                            mockStatus === 'offline' ? 'default' : 'destructive'
+                        }
+                        className="w-full">
+                        {mutationStatus === 'pending' ? (
+                            <Spinner />
+                        ) : mockStatus === 'offline' ? (
+                            'Start Server'
+                        ) : (
+                            'Stop Server'
+                        )}
+                    </Button>
+
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>
+                                Are you sure you want to stop the server?
+                            </DialogTitle>
+                            <DialogDescription>
+                                Players currently connected will be
+                                disconnected, and any unsaved progress may be
+                                lost.
+                            </DialogDescription>
+                        </DialogHeader>
+                        <DialogFooter>
+                            <DialogClose asChild>
+                                <Button
+                                    type="button"
+                                    variant="destructive"
+                                    onClick={toggleStatus}>
+                                    Stop Server
+                                </Button>
+                            </DialogClose>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
             </CardFooter>
         </Card>
     );

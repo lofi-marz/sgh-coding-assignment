@@ -14,7 +14,7 @@ export function useMockServerStatus(initialStatus: GameServerStatus) {
             setStatus((s) => toggleServerStatus(s));
             setMutationStatus('idle');
         }, MOCK_STATUS_DELAY_MS);
-    }, [status]);
+    }, []);
 
     return { status, toggleStatus, mutationStatus } as const;
 }
