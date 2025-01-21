@@ -13,7 +13,7 @@ export const GET = () => {
       region: "North America",
       mods: ["Essentials", "Dynmap", "GriefPrevention"],
     },
-    {
+    { 
       id: 2,
       name: "Creative Builders Hub",
       game: "Minecraft",

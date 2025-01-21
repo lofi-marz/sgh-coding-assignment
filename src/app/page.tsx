@@ -1,4 +1,5 @@
 import { getServers } from '@/api';
+import { ServerCard } from '@/components/ServerCard';
 
 /*
   Welcome to the simplegamehosting coding assignment!
@@ -19,6 +20,7 @@ import { getServers } from '@/api';
 export default async function Home() {
     const serversData = await getServers();
     if (!serversData.success) throw new Error('Failed to retrieve severs');
+
     //const [serverData, setServerData] = useState(null);
     // you can update this fetching code if required but it's not necessary for the assignment.
     /*useEffect(() => {
@@ -34,10 +36,15 @@ export default async function Home() {
 
     fetchServerData();
   }, []);*/
-    const server = serversData.data[0];
+
     return (
         <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
-            <ServerCard />
+            <div />
+            <main className="grid w-full gap-8 grid-auto-fit grid-max-[0.5fr] grid-min-48 md:grid-min-96">
+                {serversData.data.map((s) => (
+                    <ServerCard key={s.id} server={s} />
+                ))}
+            </main>
         </div>
     );
 }
