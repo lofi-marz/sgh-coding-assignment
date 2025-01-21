@@ -6,3 +6,4 @@ export const GAME_LOGO_MAP = {
 } satisfies Record<GameName, StaticImageData>;
 export const API_URL = '/api/mock';
 export const BASE_URL = 'http://localhost:3000';
+export const MOCK_STATUS_DELAY_MS = 1000;
