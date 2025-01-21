@@ -37,7 +37,7 @@ export function ServerCard({
         status: mockStatus,
         toggleStatus,
         mutationStatus,
-    } = useMockServerStatus(status);
+    } = useMockServerStatus(status, name);
     const [dialogOpen, setDialogOpen] = useState(false);
     const onToggleServerStatus = useCallback(() => {
         if (mockStatus === 'offline') {
