@@ -6,20 +6,27 @@ export function ServerStatusIndicator({
 }: {
     status: GameServerStatus;
 }) {
+    const isOffline = status === 'offline';
     return (
-        <div className="flex flex-row items-center justify-center gap-2">
+        <div
+            className={cn(
+                'bg-success-foreground text-success group flex h-fit flex-row items-center justify-center gap-3 self-start rounded-full px-3 py-1 text-sm',
+                isOffline && 'bg-error-foreground text-error'
+            )}>
             <p>{status === 'online' ? 'Online' : 'Offline'}</p>
             <div>
                 <div
                     className={cn(
-                        'bg-success absolute size-2 animate-ping rounded-full',
-                        status === 'online' ? 'bg-success' : 'bg-error'
-                    )}></div>
+                        'bg-success absolute size-2 animate-ping rounded-full opacity-100 transition-all',
+                        isOffline && 'bg-error opacity-0'
+                    )}
+                />
                 <div
                     className={cn(
                         'bg-success z-10 size-2 rounded-full',
-                        status === 'online' ? 'bg-success' : 'bg-error'
-                    )}></div>
+                        isOffline && 'bg-error'
+                    )}
+                />
             </div>
         </div>
     );

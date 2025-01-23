@@ -25,11 +25,11 @@ import {
     DialogFooter,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
 } from './ui/dialog';
-
+import { PlayerCount } from './PlayerCount';
+import { ServerCardSection } from './ServerCardSection';
 export function ServerCard({
-    server: { status, name, game, mods },
+    server: { status, name, game, mods, version, players, type, region },
 }: {
     server: GameServer;
 }) {
@@ -56,25 +56,32 @@ export function ServerCard({
                 <div className="grow">
                     <CardTitle className="flex w-full items-center justify-between gap-4">
                         {name}
-                        <ServerStatusIndicator status={mockStatus} />
                     </CardTitle>
                     <CardDescription
                         className={cn(
                             'flex flex-col rounded-t-xl transition-all'
                         )}>
-                        {game}
+                        {game} • {version}
                     </CardDescription>
                 </div>
+                <ServerStatusIndicator status={mockStatus} />
             </CardHeader>
-            <CardContent>
-                Test
-                <div className="flex gap-1">
-                    {mods.map((m) => (
-                        <Badge key={m} variant="secondary">
-                            {m}
-                        </Badge>
-                    ))}
+            <CardContent className="flex flex-col gap-4">
+                <div className="grid grid-cols-2 gap-4">
+                    <ServerCardSection title="Region" className="">
+                        {region}
+                    </ServerCardSection>
+                    <ServerCardSection title="Type">{type}</ServerCardSection>
                 </div>
+                <ServerCardSection title="Mods" variant="inline">
+                    <div className="flex flex-wrap gap-1">
+                        {mods.map((m) => (
+                            <Badge key={m} variant="secondary">
+                                {m}
+                            </Badge>
+                        ))}
+                    </div>
+                </ServerCardSection>
             </CardContent>
             <CardFooter>
                 <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
