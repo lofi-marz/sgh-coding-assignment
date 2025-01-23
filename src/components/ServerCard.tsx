@@ -64,17 +64,29 @@ export function ServerCard({
                         {game} • {version}
                     </CardDescription>
                 </div>
-                <ServerStatusIndicator status={mockStatus} />
             </CardHeader>
             <CardContent className="flex flex-col gap-4">
-                <div className="flex flex-row flex-wrap">
-                    <ServerCardSection title="Region" className="relative">
-                        {region}
+                <div className="flex justify-between">
+                    <ServerCardSection
+                        title="Status"
+                        className="items-start"
+                        variant="inline">
+                        <div className="flex grow items-center justify-center">
+                            <ServerStatusIndicator status={mockStatus} />
+                        </div>
                     </ServerCardSection>
-                    <ServerCardSection title="Type">{type}</ServerCardSection>
-                    <ServerCardSection title="Players" className="items-center">
+                    <ServerCardSection
+                        title="Players"
+                        className="items-end"
+                        variant="inline">
                         <PlayerCount count={players} />
                     </ServerCardSection>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                    <ServerCardSection title="Region" className="relative">
+                        <p>{region}</p>
+                    </ServerCardSection>
+                    <ServerCardSection title="Type">{type}</ServerCardSection>
                 </div>
 
                 <ServerCardSection title="Mods" variant="inline">

@@ -44,7 +44,7 @@ export default async function Home() {
                 <ThemeToggle />
             </div>
 
-            <main className="grid w-full gap-8 grid-auto-fit grid-max-fr grid-min-48 md:grid-min-96">
+            <main className="grid w-full gap-8 grid-auto-fit grid-max-60 grid-min-fr md:grid-max-fr md:grid-min-72 lg:grid-max-80 2xl:grid-max-96">
                 {serversData.data.map((s) => (
                     <ServerCard key={s.id} server={s} />
                 ))}
