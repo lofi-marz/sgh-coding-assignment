@@ -4,7 +4,7 @@ import { notoEmoji } from '@/fonts';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
-
+import { ThemeProvider } from 'next-themes';
 const geistSans = Geist({
     variable: '--font-geist-sans',
     subsets: ['latin'],
@@ -26,13 +26,13 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning>
             <body
                 className={cn(
                     `${geistSans.variable} ${geistMono.variable} antialiased`,
                     notoEmoji.variable
                 )}>
-                {children}
+                <ThemeProvider attribute="class">{children}</ThemeProvider>
                 <Toaster />
             </body>
         </html>

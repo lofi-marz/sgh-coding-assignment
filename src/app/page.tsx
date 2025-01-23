@@ -1,5 +1,6 @@
 import { getServers } from '@/api';
 import { ServerCard } from '@/components/ServerCard';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 /*
   Welcome to the simplegamehosting coding assignment!
@@ -39,7 +40,10 @@ export default async function Home() {
 
     return (
         <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
-            <div />
+            <div>
+                <ThemeToggle />
+            </div>
+
             <main className="grid w-full gap-8 grid-auto-fit grid-max-fr grid-min-48 md:grid-min-96">
                 {serversData.data.map((s) => (
                     <ServerCard key={s.id} server={s} />
