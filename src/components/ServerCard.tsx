@@ -28,6 +28,7 @@ import {
 } from './ui/dialog';
 import { PlayerCount } from './PlayerCount';
 import { ServerCardSection } from './ServerCardSection';
+import { REGION_EMOJI_MAP } from '@/consts';
 export function ServerCard({
     server: { status, name, game, mods, version, players, type, region },
 }: {
@@ -83,8 +84,17 @@ export function ServerCard({
                     </ServerCardSection>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                    <ServerCardSection title="Region" className="relative">
+                    <ServerCardSection
+                        title="Region"
+                        className="relative overflow-clip">
                         <p>{region}</p>
+                        <div
+                            className="font-noto-emoji absolute right-0 top-0 -mr-[0.5em] flex h-full items-center justify-center text-3xl text-success opacity-20"
+                            style={{
+                                filter: `hue-rotate(${stringToHueDeg(region)}deg)`,
+                            }}>
+                            {REGION_EMOJI_MAP[region]}
+                        </div>
                     </ServerCardSection>
                     <ServerCardSection title="Type">{type}</ServerCardSection>
                 </div>
