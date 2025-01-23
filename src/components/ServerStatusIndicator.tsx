@@ -10,20 +10,22 @@ export function ServerStatusIndicator({
     return (
         <div
             className={cn(
-                'bg-success-foreground text-success group flex h-fit flex-row items-center justify-center gap-3 self-start rounded-full px-3 py-1 text-sm',
+                'group flex h-fit flex-row items-center justify-center gap-3 self-start rounded-full px-3 py-1 text-sm text-success md:bg-success-foreground',
                 isOffline && 'bg-error-foreground text-error'
             )}>
-            <p>{status === 'online' ? 'Online' : 'Offline'}</p>
+            <p className="max-sm:hidden">
+                {status === 'online' ? 'Online' : 'Offline'}
+            </p>
             <div>
                 <div
                     className={cn(
-                        'bg-success absolute size-2 animate-ping rounded-full opacity-100 transition-all',
+                        'absolute size-2 animate-ping rounded-full bg-success opacity-100 transition-all',
                         isOffline && 'bg-error opacity-0'
                     )}
                 />
                 <div
                     className={cn(
-                        'bg-success z-10 size-2 rounded-full',
+                        'z-10 size-2 rounded-full bg-success',
                         isOffline && 'bg-error'
                     )}
                 />

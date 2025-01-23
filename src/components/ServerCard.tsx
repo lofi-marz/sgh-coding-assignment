@@ -9,7 +9,7 @@ import {
     CardHeader,
     CardTitle,
 } from './ui/card';
-import { cn } from '@/lib/utils';
+import { cn, stringToHueDeg } from '@/lib/utils';
 import { GameIcon } from './GameIcon';
 import { Button } from './ui/button';
 import { useMockServerStatus } from '@/hooks/useMockServerStatus';
@@ -67,16 +67,26 @@ export function ServerCard({
                 <ServerStatusIndicator status={mockStatus} />
             </CardHeader>
             <CardContent className="flex flex-col gap-4">
-                <div className="grid grid-cols-2 gap-4">
-                    <ServerCardSection title="Region" className="">
+                <div className="flex flex-row flex-wrap">
+                    <ServerCardSection title="Region" className="relative">
                         {region}
                     </ServerCardSection>
                     <ServerCardSection title="Type">{type}</ServerCardSection>
+                    <ServerCardSection title="Players" className="items-center">
+                        <PlayerCount count={players} />
+                    </ServerCardSection>
                 </div>
+
                 <ServerCardSection title="Mods" variant="inline">
                     <div className="flex flex-wrap gap-1">
                         {mods.map((m) => (
-                            <Badge key={m} variant="secondary">
+                            <Badge
+                                key={m}
+                                variant="secondary"
+                                className="bg-success-foreground text-success"
+                                style={{
+                                    filter: `hue-rotate(${stringToHueDeg(m)}deg)`,
+                                }}>
                                 {m}
                             </Badge>
                         ))}

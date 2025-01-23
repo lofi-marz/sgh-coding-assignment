@@ -2,6 +2,7 @@ import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 import animate from 'tailwindcss-animate';
 import defaultTheme from 'tailwindcss/defaultTheme';
+
 const gridTemplateColumnsPlugin = plugin(
     function ({ addUtilities, matchUtilities, theme }) {
         addUtilities({
@@ -33,6 +34,12 @@ export default {
     ],
     theme: {
         extend: {
+            fontFamily: {
+                'noto-emoji': [
+                    'var(--font-noto-emoji)',
+                    ...defaultTheme.fontFamily.sans,
+                ],
+            },
             colors: {
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
