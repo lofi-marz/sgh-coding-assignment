@@ -11,7 +11,7 @@ export function ServerStatusIndicator({
         <div
             className={cn(
                 'group flex h-fit flex-row items-center justify-center gap-3 self-start rounded-full px-3 py-1 text-sm text-success md:bg-success-foreground',
-                isOffline && 'bg-error-foreground text-error'
+                isOffline && 'text-error md:bg-error-foreground'
             )}>
             <p className="max-sm:hidden">
                 {status === 'online' ? 'Online' : 'Offline'}
