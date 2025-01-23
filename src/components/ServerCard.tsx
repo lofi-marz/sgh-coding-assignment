@@ -47,7 +47,7 @@ export function ServerCard({
         }
     }, [mockStatus, toggleStatus]);
     return (
-        <Card>
+        <Card className="flex flex-col">
             <CardHeader
                 className={cn(
                     'flex flex-row items-center justify-start gap-4 rounded-t-xl transition-all'
@@ -65,7 +65,7 @@ export function ServerCard({
                     </CardDescription>
                 </div>
             </CardHeader>
-            <CardContent className="flex flex-col gap-4">
+            <CardContent className="flex grow flex-col gap-4">
                 <div className="flex justify-between">
                     <ServerCardSection
                         title="Status"
