@@ -4,6 +4,10 @@ import { GameServerStatus } from '@/types';
 import { useCallback, useState } from 'react';
 import { toast } from 'sonner';
 
+/**
+ * Since the data is hardcoded, there is no actual API call to start/stop a server
+ * This hook simulates the server status change, adding a delay in order to show a loading state
+ */
 export function useMockServerStatus(
     initialStatus: GameServerStatus,
     serverName: string

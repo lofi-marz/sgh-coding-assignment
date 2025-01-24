@@ -29,6 +29,10 @@ import {
 import { PlayerCount } from './PlayerCount';
 import { ServerCardSection } from './ServerCardSection';
 import { REGION_EMOJI_MAP } from '@/consts';
+
+/**
+ * Card component for displaying information about a game server
+ */
 export function ServerCard({
     server: { status, name, game, mods, version, players, type, region },
 }: {

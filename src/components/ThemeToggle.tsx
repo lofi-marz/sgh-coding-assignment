@@ -9,9 +9,13 @@ const icons = {
     system: LaptopMinimal,
 };
 import { motion } from 'motion/react';
+
+/**
+ * Button to toggle the theme between light, dark and system
+ */
 export function ThemeToggle() {
     const { theme, setTheme } = useTheme();
-    console.log(theme);
+
     return (
         <div className="grid grid-cols-3 rounded-full border border-border bg-muted">
             {['light', 'dark', 'system'].map((t) => {

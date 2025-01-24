@@ -1,5 +1,8 @@
 import { GameServerPlayerCount } from '@/types';
 
+/**
+ * Displays the current player count of a game server.
+ */
 export function PlayerCount({ count }: { count: GameServerPlayerCount }) {
     const [current, max] = count.split('/');
     return (
