@@ -29,9 +29,13 @@ export default function RootLayout({
         <html lang="en" suppressHydrationWarning>
             <body
                 className={cn(
-                    `${geistSans.variable} ${geistMono.variable} antialiased`,
+                    `${geistSans.variable} ${geistMono.variable} bg-grid antialiased`,
                     notoEmoji.variable
-                )}>
+                )}
+                style={{
+                    background:
+                        'radial-gradient(#0000, hsl(var(--background)))',
+                }}>
                 <ThemeProvider attribute="class">{children}</ThemeProvider>
                 <Toaster />
             </body>
