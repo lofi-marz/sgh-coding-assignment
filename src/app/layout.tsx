@@ -31,12 +31,17 @@ export default function RootLayout({
                 className={cn(
                     `${geistSans.variable} ${geistMono.variable} bg-grid antialiased`,
                     notoEmoji.variable
-                )}
-                style={{
-                    background:
-                        'radial-gradient(#0000, hsl(var(--background)))',
-                }}>
-                <ThemeProvider attribute="class">{children}</ThemeProvider>
+                )}>
+                <ThemeProvider attribute="class">
+                    <div
+                        style={{
+                            background:
+                                'radial-gradient(#0000, hsl(var(--background)))',
+                        }}
+                        className="absolute inset-0 size-full"
+                    />
+                    {children}
+                </ThemeProvider>
                 <Toaster />
             </body>
         </html>
