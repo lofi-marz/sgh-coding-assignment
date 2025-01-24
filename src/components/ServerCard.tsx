@@ -119,19 +119,21 @@ export function ServerCard({
                 </div>
 
                 <ServerCardSection title="Mods" variant="inline">
-                    <div className="flex flex-wrap gap-1">
+                    <ul className="flex flex-wrap gap-1.5">
                         {mods.map((m) => (
-                            <Badge
-                                key={m}
-                                variant="secondary"
-                                className="bg-success-foreground text-success"
-                                style={{
-                                    filter: `hue-rotate(${stringToHueDeg(m)}deg)`,
-                                }}>
-                                {m}
-                            </Badge>
+                            <li key={m}>
+                                <Badge
+                                    key={m}
+                                    variant="secondary"
+                                    className="bg-success-foreground text-success"
+                                    style={{
+                                        filter: `hue-rotate(${stringToHueDeg(m)}deg)`,
+                                    }}>
+                                    {m}
+                                </Badge>
+                            </li>
                         ))}
-                    </div>
+                    </ul>
                 </ServerCardSection>
             </CardContent>
             <CardFooter>
