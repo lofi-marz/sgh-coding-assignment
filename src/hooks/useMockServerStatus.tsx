@@ -1,7 +1,7 @@
 import { MOCK_STATUS_DELAY_MS } from '@/consts';
 import { toggleServerStatus } from '@/lib/utils';
 import { GameServerStatus } from '@/types';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { toast } from 'sonner';
 
 /**

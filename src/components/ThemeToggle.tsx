@@ -9,20 +9,36 @@ const icons = {
     system: LaptopMinimal,
 };
 import { motion } from 'motion/react';
+import { useEffect, useState } from 'react';
 
 /**
  * Button to toggle the theme between light, dark and system
  */
 export function ThemeToggle() {
+    const [mounted, setMounted] = useState(false);
     const { theme, setTheme } = useTheme();
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
+    if (!mounted) {
+        return (
+            <motion.div
+                className="size-9 rounded-full border border-border bg-muted"
+                layoutId="theme-toggle"
+            />
+        );
+    }
     return (
-        <div className="grid grid-cols-3 rounded-full border border-border bg-muted">
+        <motion.div
+            className="grid grid-cols-3 overflow-clip rounded-full border border-border bg-muted"
+            layoutId="theme-toggle">
             {['light', 'dark', 'system'].map((t) => {
                 const Icon =
                     t in icons ? icons[t as keyof typeof icons] : icons.light;
                 return (
                     <Button
+                        name={`${theme}`}
                         key={t}
                         onClick={() => setTheme(t)}
                         size="icon"
@@ -43,6 +59,6 @@ export function ThemeToggle() {
                     </Button>
                 );
             })}
-        </div>
+        </motion.div>
     );
 }
