@@ -20,7 +20,10 @@ export function useMockServerStatus(
     const toggleStatus = useCallback(() => {
         setMutationStatus('pending');
         setTimeout(() => {
-            toast(`Server ${serverName} is now ${toggleServerStatus(status)}`);
+            toast.success(
+                `Server ${serverName} is now ${toggleServerStatus(status)}`
+            );
+
             setStatus(toggleServerStatus);
             setMutationStatus('idle');
         }, MOCK_STATUS_DELAY_MS);
