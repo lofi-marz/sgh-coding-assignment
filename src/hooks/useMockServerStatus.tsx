@@ -1,7 +1,7 @@
 import { MOCK_STATUS_DELAY_MS } from '@/consts';
 import { toggleServerStatus } from '@/lib/utils';
 import { GameServerStatus } from '@/types';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 /**
@@ -16,18 +16,15 @@ export function useMockServerStatus(
     const [mutationStatus, setMutationStatus] = useState<'idle' | 'pending'>(
         'idle'
     );
+
     const toggleStatus = useCallback(() => {
         setMutationStatus('pending');
         setTimeout(() => {
-            setStatus((s) => {
-                const newValue = toggleServerStatus(s);
-                toast(`Server ${serverName} is now ${newValue}`);
-                return newValue;
-            });
-
+            toast(`Server ${serverName} is now ${toggleServerStatus(status)}`);
+            setStatus(toggleServerStatus);
             setMutationStatus('idle');
         }, MOCK_STATUS_DELAY_MS);
-    }, []);
+    }, [status, serverName]);
 
     return { status, toggleStatus, mutationStatus } as const;
 }
