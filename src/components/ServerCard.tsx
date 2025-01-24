@@ -29,6 +29,7 @@ import {
 import { PlayerCount } from './PlayerCount';
 import { ServerCardSection } from './ServerCardSection';
 import { REGION_EMOJI_MAP } from '@/consts';
+import { ServerTypeIcon } from './ServerTypeIcon';
 
 /**
  * Card component for displaying information about a game server
@@ -93,14 +94,28 @@ export function ServerCard({
                         className="relative overflow-clip">
                         <p>{region}</p>
                         <div
-                            className="font-noto-emoji absolute right-0 top-0 -mr-[0.5em] flex h-full items-center justify-center text-3xl text-success opacity-20"
+                            className="absolute right-0 top-0 -mr-[0.5em] flex h-full items-center justify-center font-noto-emoji text-3xl text-success opacity-20"
                             style={{
                                 filter: `hue-rotate(${stringToHueDeg(region)}deg)`,
                             }}>
                             {REGION_EMOJI_MAP[region]}
                         </div>
                     </ServerCardSection>
-                    <ServerCardSection title="Type">{type}</ServerCardSection>
+                    <ServerCardSection
+                        title="Type"
+                        className="relative overflow-clip">
+                        {type}
+                        <div
+                            className="absolute right-0 top-0 -mr-[0.2em] flex h-full items-center justify-center font-noto-emoji text-3xl text-success opacity-20"
+                            style={{
+                                filter: `hue-rotate(${stringToHueDeg(type)}deg)`,
+                            }}>
+                            <ServerTypeIcon
+                                type={type}
+                                className="size-[1.1em]"
+                            />
+                        </div>
+                    </ServerCardSection>
                 </div>
 
                 <ServerCardSection title="Mods" variant="inline">
